@@ -9,3 +9,9 @@ flux bootstrap github \
   --personal
 
 Source: https://fluxcd.io/flux/guides/image-update/
+
+## How to check
+flux get sources git
+flux get kustomizations
+flux logs
+
