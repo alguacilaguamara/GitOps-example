@@ -23,10 +23,6 @@ spec:
         volumeMounts:
         - name: html-volume
           mountPath: /usr/share/nginx/html
-      volumeMounts:
-      - name: config
-        mountPath: /usr/share/nginx/html
-        readOnly: true
   volumes:
   - name: html-volume
     configMap:
