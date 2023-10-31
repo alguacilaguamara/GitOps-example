@@ -28,7 +28,7 @@ spec:
         mountPath: /usr/share/nginx/html
         readOnly: true
   volumes:
-  - name: html-volume
+  - name: game.html
     configMap:
       name: html-configmap
 ---
