@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-deployment
+  labels:
+    app: html
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: html
+  template:
+    metadata:
+      labels:
+        app: html
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
+      volumeMounts:
+      - name: config
+        mountPath: /usr/share/nginx/html
+        readOnly: true
+  volumes:
+  - name: html-volume
+    configMap:
+      name: html-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: html-service
+spec:
+  selector:
+    app: html
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
