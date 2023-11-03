@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-deployment
+  namespace: default
+  labels:
+    app: html
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: html
+  template:
+    metadata:
+      labels:
+        app: html
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: html-volume
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: html-volume
+        configMap:
+          name: html-configmap
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: html-service
+  namespace: default
+spec:
+  selector:
+    app: html
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
