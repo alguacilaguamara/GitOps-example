@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mi-ingress
+  namespace: rollout
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    # nginx.ingress.kubernetes.io/use-regex: "true"
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    # nginx.ingress.kubernetes.io/app-root: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: canary-demo
+            port:
+              number: 80
+
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: canary-demo-preview-lb
+#   namespace: rollout
+#   annotations:
+#     metallb.universe.tf/allow-shared-ip: "true"
+# spec:
+#   selector:
+#     app: canary-demo
+#   type: LoadBalancer
+#   ports:
+#   - name: http
+#     protocol: TCP
+#     port: 80
+#     targetPort: 80
