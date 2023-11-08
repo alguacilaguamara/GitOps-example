@@ -38,6 +38,10 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl create namespace argo-rollouts
 kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 ```
+Then you can access to the dashboard using:
+```sh
+kubectl argo rollouts dashboard 
+```
 > Source https://argoproj.github.io/argo-rollouts/installation/#controller-installation
 
 ## Install Crossplane to deploy infrastructure on AWS
