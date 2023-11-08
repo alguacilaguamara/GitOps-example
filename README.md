@@ -9,6 +9,7 @@ flux bootstrap github \
   --personal
 
 Make your changes in the repo and then:
+
 flux reconcile kustomization flux-system --with-source
 
 Source: https://fluxcd.io/flux/guides/image-update/
